@@ -1,14 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
-
+import '../../styles/Dashboard.css';
 const Dashboard = () => {
   const [familyMembers, setFamilyMembers] = useState([]);
   const [chores, setChores] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-
-  // Get family members and chores on component mount
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -17,7 +15,6 @@ const Dashboard = () => {
           axios.get('/api/family'),
           axios.get('/api/chores')
         ]);
-
         setFamilyMembers(familyRes.data);
         setChores(choresRes.data);
         setError(null);
@@ -35,14 +32,10 @@ const Dashboard = () => {
 
     fetchData();
   }, []);
-
-  // Calculate statistics
   const totalChores = chores.length;
   const completedChores = chores.filter(chore => chore.status === 'completed').length;
   const pendingChores = totalChores - completedChores;
   const completionRate = totalChores > 0 ? Math.round((completedChores / totalChores) * 100) : 0;
-
-  // Group chores by family member
   const choresByMember = chores.reduce((acc, chore) => {
     if (chore.assigned_to) {
       if (!acc[chore.assigned_to]) {
@@ -52,23 +45,19 @@ const Dashboard = () => {
     }
     return acc;
   }, {});
-
   if (loading) {
     return <div className="text-center my-5"><div className="spinner-border"></div></div>;
   }
-
   return (
     <div className="dashboard">
-      <div className="bg-light p-4 rounded-3 mb-4" style={{ background: 'linear-gradient(135deg, #f5f7fa 0%, #e4edf9 100%)' }}>
+      <div className="bg-light p-4 rounded-3 mb-4 bg-gradient">
         <h1 className="mb-2 fw-bold">
           <i className="fas fa-tachometer-alt me-2 text-primary"></i>
           Dashboard
         </h1>
         <p className="text-muted">Manage and track your family's chores</p>
       </div>
-      
       {error && <div className="alert alert-danger">{error}</div>}
-      
       <div className="row mb-5">
         <div className="col-md-3 mb-3">
           <div className="card bg-primary text-white">
@@ -79,7 +68,6 @@ const Dashboard = () => {
             </div>
           </div>
         </div>
-        
         <div className="col-md-3 mb-3">
           <div className="card bg-success text-white">
             <div className="card-body text-center">
@@ -89,7 +77,6 @@ const Dashboard = () => {
             </div>
           </div>
         </div>
-        
         <div className="col-md-3 mb-3">
           <div className="card bg-warning text-white">
             <div className="card-body text-center">
@@ -99,7 +86,6 @@ const Dashboard = () => {
             </div>
           </div>
         </div>
-        
         <div className="col-md-3 mb-3">
           <div className="card bg-info text-white">
             <div className="card-body text-center">
@@ -110,7 +96,6 @@ const Dashboard = () => {
           </div>
         </div>
       </div>
-      
       <div className="row">
         <div className="col-md-6 mb-4">
           <div className="card h-100">
@@ -140,8 +125,7 @@ const Dashboard = () => {
                       className="list-group-item d-flex justify-content-between align-items-center px-0"
                     >
                       <div className="d-flex align-items-center">
-                        <div className="bg-primary text-white rounded-circle d-flex align-items-center justify-content-center me-3" 
-                          style={{ width: '40px', height: '40px' }}>
+                        <div className="bg-primary text-white rounded-circle member-avatar me-3">
                           {member.name.charAt(0).toUpperCase()}
                         </div>
                         <span className="fw-medium">{member.name}</span>
@@ -156,7 +140,6 @@ const Dashboard = () => {
             </div>
           </div>
         </div>
-        
         <div className="col-md-6 mb-4">
           <div className="card h-100">
             <div className="card-header d-flex justify-content-between align-items-center bg-white">
@@ -214,5 +197,4 @@ const Dashboard = () => {
     </div>
   );
 };
-
 export default Dashboard; 

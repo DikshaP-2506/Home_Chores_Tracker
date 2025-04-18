@@ -1,0 +1,30 @@
+.home-page {
+  padding: 2rem 0;
+}
+
+.home-page .card {
+  transition: transform 0.3s ease;
+  border: none;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.home-page .card:hover {
+  transform: translateY(-5px);
+}
+
+.home-page .card-body {
+  padding: 2rem;
+}
+
+.home-page .fas {
+  color: #007bff;
+}
+
+.home-page .btn {
+  padding: 0.5rem 1.5rem;
+}
+
+.home-page .lead {
+  font-size: 1.2rem;
+  color: #6c757d;
+} 

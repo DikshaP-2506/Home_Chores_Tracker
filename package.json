@@ -1,0 +1,21 @@
+{
+  "name": "home_chores_tracker",
+  "version": "1.0.0",
+  "description": "A full-stack web application for tracking and managing family chores. Built with React, Node.js, Express, and PostgreSQL.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DikshaP-2506/Home_Chores_Tracker.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/DikshaP-2506/Home_Chores_Tracker/issues"
+  },
+  "homepage": "https://github.com/DikshaP-2506/Home_Chores_Tracker#readme"
+}

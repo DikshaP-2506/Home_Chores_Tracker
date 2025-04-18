@@ -40,13 +40,14 @@ const FamilyMemberForm = ({ currentMember, isEditing, addMember, updateMember, c
       setFormData({
         name: ''
       });
+      clearForm();
     }
 
     setLoading(false);
   };
 
   return (
-    <form onSubmit={onSubmit}>
+    <form onSubmit={onSubmit} className="family-member-form">
       <div className="mb-3">
         <label htmlFor="name" className="form-label">Name</label>
         <input

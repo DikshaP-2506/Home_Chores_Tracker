@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import ChoreForm from './ChoreForm';
 import ChoresList from './ChoresList';
+import '../../styles/Chores.css';
 
 const ChoresManager = () => {
   const [chores, setChores] = useState([]);
@@ -134,69 +135,71 @@ const ChoresManager = () => {
   });
 
   return (
-    <div className="row">
-      <div className="col-md-12 mb-4">
-        <h1>Chores Manager</h1>
-        {error && <div className="alert alert-danger">{error}</div>}
-      </div>
-      
-      <div className="col-md-4 mb-4">
-        <div className="card">
-          <div className="card-header">
-            <h5 className="mb-0">{isEditing ? 'Edit Chore' : 'Add New Chore'}</h5>
-          </div>
-          <div className="card-body">
-            <ChoreForm 
-              currentChore={currentChore}
-              familyMembers={familyMembers}
-              isEditing={isEditing}
-              addChore={addChore}
-              updateChore={updateChore}
-              clearForm={clearForm}
-            />
+    <div className="chores-manager">
+      <div className="row">
+        <div className="col-md-12 mb-4">
+          <h1>Chores Manager</h1>
+          {error && <div className="alert alert-danger">{error}</div>}
+        </div>
+        
+        <div className="col-md-4 mb-4">
+          <div className="card">
+            <div className="card-header">
+              <h5 className="mb-0">{isEditing ? 'Edit Chore' : 'Add New Chore'}</h5>
+            </div>
+            <div className="card-body">
+              <ChoreForm 
+                currentChore={currentChore}
+                familyMembers={familyMembers}
+                isEditing={isEditing}
+                addChore={addChore}
+                updateChore={updateChore}
+                clearForm={clearForm}
+              />
+            </div>
           </div>
         </div>
-      </div>
-      
-      <div className="col-md-8">
-        <div className="card">
-          <div className="card-header">
-            <ul className="nav nav-tabs card-header-tabs">
-              <li className="nav-item">
-                <button 
-                  className={`nav-link ${activeTab === 'all' ? 'active' : ''}`} 
-                  onClick={() => setActiveTab('all')}
-                >
-                  All
-                </button>
-              </li>
-              <li className="nav-item">
-                <button 
-                  className={`nav-link ${activeTab === 'pending' ? 'active' : ''}`} 
-                  onClick={() => setActiveTab('pending')}
-                >
-                  Pending
-                </button>
-              </li>
-              <li className="nav-item">
-                <button 
-                  className={`nav-link ${activeTab === 'completed' ? 'active' : ''}`} 
-                  onClick={() => setActiveTab('completed')}
-                >
-                  Completed
-                </button>
-              </li>
-            </ul>
-          </div>
-          <div className="card-body">
-            <ChoresList 
-              chores={filteredChores}
-              familyMembers={familyMembers}
-              loading={loading}
-              editChore={editChore}
-              deleteChore={deleteChore}
-              completeChore={completeChore}
-            />
+        
+        <div className="col-md-8">
+          <div className="card">
+            <div className="card-header">
+              <ul className="nav nav-tabs card-header-tabs">
+                <li className="nav-item">
+                  <button 
+                    className={`nav-link ${activeTab === 'all' ? 'active' : ''}`} 
+                    onClick={() => setActiveTab('all')}
+                  >
+                    All
+                  </button>
+                </li>
+                <li className="nav-item">
+                  <button 
+                    className={`nav-link ${activeTab === 'pending' ? 'active' : ''}`} 
+                    onClick={() => setActiveTab('pending')}
+                  >
+                    Pending
+                  </button>
+                </li>
+                <li className="nav-item">
+                  <button 
+                    className={`nav-link ${activeTab === 'completed' ? 'active' : ''}`} 
+                    onClick={() => setActiveTab('completed')}
+                  >
+                    Completed
+                  </button>
+                </li>
+              </ul>
+            </div>
+            <div className="card-body">
+              <ChoresList 
+                chores={filteredChores}
+                familyMembers={familyMembers}
+                loading={loading}
+                editChore={editChore}
+                deleteChore={deleteChore}
+                completeChore={completeChore}
+              />
+            </div>
           </div>
         </div>
       </div>

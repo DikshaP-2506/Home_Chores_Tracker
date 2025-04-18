@@ -1,0 +1,49 @@
+.auth-form {
+  padding: 2rem 0;
+}
+
+.auth-form .card {
+  border: none;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.auth-form .card-body {
+  padding: 3rem;
+}
+
+.auth-form .input-group-text {
+  background-color: #f8f9fa;
+  border-right: none;
+}
+
+.auth-form .form-control {
+  border-left: none;
+}
+
+.auth-form .form-control:focus {
+  box-shadow: none;
+  border-color: #ced4da;
+}
+
+.auth-form .input-group:focus-within .input-group-text {
+  border-color: #86b7fe;
+}
+
+.auth-form .fas {
+  width: 16px;
+  text-align: center;
+  color: #6c757d;
+}
+
+.auth-form .btn-primary {
+  padding: 0.8rem;
+  font-weight: 500;
+}
+
+.auth-form .text-primary {
+  text-decoration: none;
+}
+
+.auth-form .text-primary:hover {
+  text-decoration: underline;
+} 

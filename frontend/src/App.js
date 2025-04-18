@@ -3,8 +3,6 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-d
 import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
-
-// Components
 import Navbar from './components/layout/Navbar';
 import Home from './components/pages/Home';
 import Login from './components/auth/Login';
@@ -13,33 +11,23 @@ import Dashboard from './components/pages/Dashboard';
 import FamilyMembers from './components/family/FamilyMembers';
 import ChoresManager from './components/chores/ChoresManager';
 
-// Context
 import AuthContext from './context/AuthContext';
-
-// Configure axios with baseURL
 axios.defaults.baseURL = 'http://localhost:5000';
-
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-
-  // Check if user is authenticated on initial load
   useEffect(() => {
     const checkAuth = async () => {
       const token = localStorage.getItem('token');
-      
       if (!token) {
         setLoading(false);
         return;
       }
-
       try {
-        // Set auth token for all requests
         axios.defaults.headers.common['x-auth-token'] = token;
         const res = await axios.get('/api/users/me');
-        
         setUser(res.data);
         setIsAuthenticated(true);
       } catch (err) {
@@ -47,14 +35,10 @@ function App() {
         delete axios.defaults.headers.common['x-auth-token'];
         setError('Authentication failed, please login again');
       }
-      
       setLoading(false);
     };
-
     checkAuth();
   }, []);
-
-  // Setup axios response interceptor to handle auth errors
   useEffect(() => {
     const responseInterceptor = axios.interceptors.response.use(
       response => response,
@@ -67,13 +51,10 @@ function App() {
         return Promise.reject(error);
       }
     );
-
     return () => {
-      // Clean up interceptor on component unmount
       axios.interceptors.response.eject(responseInterceptor);
     };
   }, []);
-
   const login = (token, userData) => {
     localStorage.setItem('token', token);
     axios.defaults.headers.common['x-auth-token'] = token;
@@ -81,20 +62,16 @@ function App() {
     setIsAuthenticated(true);
     setError(null);
   };
-
   const logout = () => {
     localStorage.removeItem('token');
     delete axios.defaults.headers.common['x-auth-token'];
     setUser(null);
     setIsAuthenticated(false);
   };
-
-  // Private route component
   const PrivateRoute = ({ children }) => {
     if (loading) return <div>Loading...</div>;
     return isAuthenticated ? children : <Navigate to="/login" />;
   };
-
   return (
     <AuthContext.Provider 
       value={{ 
@@ -148,5 +125,4 @@ function App() {
     </AuthContext.Provider>
   );
 }
-
 export default App;

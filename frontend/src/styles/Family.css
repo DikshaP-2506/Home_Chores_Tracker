@@ -1,0 +1,40 @@
+.family-members .card {
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.family-members .table {
+  margin-bottom: 0;
+}
+
+.family-members .member-avatar {
+  width: 36px;
+  height: 36px;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.family-members .btn {
+  padding: 0.25rem 0.5rem;
+  font-weight: 500;
+}
+
+.family-members .btn .fas {
+  margin-right: 0.25rem;
+}
+
+.family-member-form .form-label {
+  font-weight: 500;
+  color: #495057;
+}
+
+.family-member-form .form-control:focus {
+  border-color: #86b7fe;
+  box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+}
+
+.family-member-form .btn {
+  padding: 0.5rem 1rem;
+  font-weight: 500;
+} 

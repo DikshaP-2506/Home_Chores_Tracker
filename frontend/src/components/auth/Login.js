@@ -2,7 +2,7 @@ import React, { useState, useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import AuthContext from '../../context/AuthContext';
-
+import '../../styles/Auth.css';
 const Login = () => {
   const [formData, setFormData] = useState({
     username: '',
@@ -10,35 +10,27 @@ const Login = () => {
   });
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
-  
   const { login } = useContext(AuthContext);
   const navigate = useNavigate();
-
   const { username, password } = formData;
-
   const onChange = e => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
-
   const onSubmit = async e => {
     e.preventDefault();
     setError('');
     setLoading(true);
-
     try {
       const res = await axios.post('/api/users/login', {
         username,
         password
       });
-
       if (res.data.token) {
-        // Get user data
         const userRes = await axios.get('/api/users/me', {
           headers: {
             'x-auth-token': res.data.token
           }
         });
-        
         login(res.data.token, userRes.data);
         navigate('/dashboard');
       }
@@ -49,10 +41,8 @@ const Login = () => {
           : 'Login failed. Please check your credentials.'
       );
     }
-    
     setLoading(false);
   };
-
   return (
     <div className="row justify-content-center auth-form">
       <div className="col-md-6">
@@ -63,9 +53,7 @@ const Login = () => {
               <h2 className="fw-bold">Welcome Back</h2>
               <p className="text-muted">Sign in to manage your family chores</p>
             </div>
-            
             {error && <div className="alert alert-danger">{error}</div>}
-            
             <form onSubmit={onSubmit}>
               <div className="mb-4">
                 <label htmlFor="username" className="form-label">Username</label>
@@ -104,7 +92,6 @@ const Login = () => {
                   />
                 </div>
               </div>
-              
               <button
                 type="submit"
                 className="btn btn-primary w-100 py-2 mt-3"
@@ -118,7 +105,6 @@ const Login = () => {
                 ) : 'Sign In'}
               </button>
             </form>
-            
             <div className="mt-4 text-center">
               <p>
                 Don't have an account? <Link to="/register" className="text-primary fw-bold">Register</Link>
@@ -130,5 +116,4 @@ const Login = () => {
     </div>
   );
 };
-
 export default Login; 

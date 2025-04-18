@@ -79,7 +79,7 @@ const ChoreForm = ({ currentChore, familyMembers, isEditing, addChore, updateCho
   };
 
   return (
-    <form onSubmit={onSubmit}>
+    <form onSubmit={onSubmit} className="chore-form">
       <div className="mb-3">
         <label htmlFor="title" className="form-label">Title</label>
         <input
