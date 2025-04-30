@@ -77,5 +77,3 @@ A full-stack web application for tracking and managing family chores. Built with
 - `src/components/pages/` - Page components (Home, Dashboard)
 - `src/components/layout/` - Layout components (Navbar)
 
-## License
-MIT
